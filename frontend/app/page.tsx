@@ -257,29 +257,6 @@ function HeroSection() {
       {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#f8f9f9] via-white to-white" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-[#f0f1f2]/50 to-transparent rounded-full blur-3xl" />
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-[#1a1b1c]/5"
-            style={{
-              left: ,
-              top: ,
-            }}
-            animate={{
-              y: [-10, 10, -10],
-              opacity: [0.3, 0.7, 0.3],
-            }}
-            transition={{
-              duration: 3 + i * 0.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.3,
-            }}
-          />
-        ))}
-      </div>
 
       <motion.div style={{ opacity: heroOpacity, y: heroY }} className="container-narrow relative z-10 pt-24 pb-20 text-center">
         <motion.div
