@@ -211,7 +211,7 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-1">
           <a href="#how-it-works" className="btn-ghost">How It Works</a>
           <a href="#faq" className="btn-ghost">FAQ</a>
-          <Link href="/upload" className="btn-dark ml-3">
+          <Link href="/waitlist" className="btn-dark ml-3">
             Start Now
           </Link>
         </div>
@@ -235,7 +235,7 @@ function Navbar() {
             <div className="container-page py-4 flex flex-col gap-2">
               <a href="#how-it-works" className="btn-ghost justify-start" onClick={() => setMobileOpen(false)}>How It Works</a>
               <a href="#faq" className="btn-ghost justify-start" onClick={() => setMobileOpen(false)}>FAQ</a>
-              <Link href="/upload" className="btn-dark mt-2 justify-center" onClick={() => setMobileOpen(false)}>Start Now</Link>
+              <Link href="/waitlist" className="btn-dark mt-2 justify-center" onClick={() => setMobileOpen(false)}>Start Now</Link>
             </div>
           </motion.div>
         )}
@@ -298,7 +298,7 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <Link href="/upload" className="btn-dark text-[16px] px-8 py-3.5">
+          <Link href="/waitlist" className="btn-dark text-[16px] px-8 py-3.5">
             Try It Free — No Card Required
           </Link>
           <a href="#how-it-works" className="btn-outline text-[16px] px-8 py-3.5">
@@ -799,8 +799,8 @@ function PricingSection() {
             Get your first analysis completely free. No credit card. 
             If you love it, unlock unlimited analyses for .99/month.
           </p>
-          <Link href="/upload" className="btn-dark text-[16px] px-10 py-4">
-            Start Free Analysis →
+          <Link href="/waitlist" className="btn-dark text-[16px] px-10 py-4">
+            Join Waitlist →
           </Link>
           <p className="text-[#8b9094] text-[13px] mt-4">
             Coming soon: .99 one-time or .99/year unlimited
@@ -891,10 +891,10 @@ function CTASection() {
             No surgery. No filters. Just results.
           </p>
           <Link
-            href="/upload"
+            href="/waitlist"
             className="inline-flex items-center justify-center rounded-full bg-white text-[#1a1b1c] px-8 py-3.5 text-[16px] font-medium hover:bg-[#f0f1f2] active:scale-[0.97] transition-all duration-200"
           >
-            Start Free Analysis
+            Join Waitlist
           </Link>
           <p className="text-[#5f6468] text-[13px] mt-4">
             Free trial. No credit card required.
@@ -943,7 +943,6 @@ export default function HomePage() {
       <HeroSection />
       <HowItWorksSection />
       <VisualizationComingSoon />
-      <ComparisonCards />
       <ProtocolSection />
       <CountersSection />
       <ResearchSection />
