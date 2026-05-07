@@ -101,6 +101,57 @@ const PROTOCOL_CATEGORIES = [
 ];
 
 // ═══════════════════════════════════════════
+// ATMOSPHERIC BACKGROUND GLOW
+// ═══════════════════════════════════════════
+
+type AuraTone = "warm" | "cool" | "neutral" | "rose" | "sky" | "stone";
+
+function AtmosphericGlow({
+  tone = "neutral",
+  position = "center",
+  size = 600,
+  opacity = 0.1,
+}: {
+  tone?: AuraTone;
+  position?: "center" | "top-right" | "bottom-left" | "top-left" | "bottom-right" | "top" | "bottom";
+  size?: number;
+  opacity?: number;
+}) {
+  const colors: Record<AuraTone, string> = {
+    warm: "#e8e0d5",
+    cool: "#dce3ea",
+    neutral: "#e4e5e6",
+    rose: "#eadfe3",
+    sky: "#dde5ed",
+    stone: "#e2e3e4",
+  };
+
+  const posClasses: Record<string, string> = {
+    center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+    "top-right": "-top-32 -right-32",
+    "bottom-left": "-bottom-32 -left-32",
+    "top-left": "-top-32 -left-32",
+    "bottom-right": "-bottom-32 -right-32",
+    top: "left-1/2 -translate-x-1/2 -top-32",
+    bottom: "left-1/2 -translate-x-1/2 -bottom-32",
+  };
+
+  return (
+    <motion.div
+      className={`absolute ${posClasses[position]} rounded-full blur-3xl pointer-events-none`}
+      style={{
+        width: size,
+        height: size,
+        background: `radial-gradient(circle, ${colors[tone]} 30%, transparent 70%)`,
+        opacity,
+      }}
+      animate={{ scale: [1, 1.06, 1], opacity: [opacity, opacity * 0.6, opacity] }}
+      transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════
 // ANIMATION UTILITIES
 // ═══════════════════════════════════════════
 
@@ -403,8 +454,9 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 sm:py-32 bg-[#f8f9f9]">
-      <div className="container-page">
+    <section id="how-it-works" className="relative py-24 sm:py-32 bg-[#f8f9f9] overflow-hidden">
+      <AtmosphericGlow tone="warm" position="bottom-left" size={700} opacity={0.09} />
+      <div className="container-page relative z-10">
         <ScrollReveal className="text-center mb-16 sm:mb-20">
           <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
             How It Works
@@ -502,8 +554,9 @@ function ComparisonCards() {
   ];
 
   return (
-    <section className="py-20 bg-[#f8f9f9]">
-      <div className="container-page">
+    <section className="relative py-20 bg-[#f8f9f9] overflow-hidden">
+      <AtmosphericGlow tone="cool" position="top-right" size={550} opacity={0.08} />
+      <div className="container-page relative z-10">
         <ScrollReveal className="text-center mb-14">
           <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-[-0.02em] text-[#1a1b1c] mb-3">
             Real improvements, measured in numbers
@@ -633,8 +686,9 @@ function BeforeAfterSlider() {
   };
 
   return (
-    <section className="py-24 sm:py-32">
-      <div className="container-page">
+    <section className="relative py-24 sm:py-32 overflow-hidden">
+      <AtmosphericGlow tone="rose" position="bottom-left" size={600} opacity={0.07} />
+      <div className="container-page relative z-10">
         <ScrollReveal className="text-center mb-16">
           <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
             Real Transformations
@@ -704,8 +758,9 @@ function BeforeAfterSlider() {
 
 function ProtocolSection() {
   return (
-    <section className="py-24 sm:py-32 bg-[#f8f9f9]">
-      <div className="container-page">
+    <section className="relative py-24 sm:py-32 bg-[#f8f9f9] overflow-hidden">
+      <AtmosphericGlow tone="sky" position="top" size={650} opacity={0.08} />
+      <div className="container-page relative z-10">
         <ScrollReveal className="text-center mb-16">
           <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
             Your Personalized Protocol
@@ -739,8 +794,9 @@ function ResearchSection() {
   const [tab, setTab] = useState("Finances");
 
   return (
-    <section className="py-24 sm:py-32">
-      <div className="container-page">
+    <section className="relative py-24 sm:py-32 overflow-hidden">
+      <AtmosphericGlow tone="stone" position="bottom" size={700} opacity={0.07} />
+      <div className="container-page relative z-10">
         <ScrollReveal className="text-center mb-16">
           <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
             Research
@@ -860,8 +916,9 @@ function CountersSection() {
 
 function PricingSection() {
   return (
-    <section className="py-24 sm:py-32 bg-[#f8f9f9]">
-      <div className="container-narrow text-center">
+    <section className="relative py-24 sm:py-32 bg-[#f8f9f9] overflow-hidden">
+      <AtmosphericGlow tone="warm" position="bottom-right" size={600} opacity={0.09} />
+      <div className="container-narrow text-center relative z-10">
         <ScrollReveal>
           <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
             Start Free — No Card Required
@@ -898,8 +955,9 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 sm:py-32">
-      <div className="container-narrow">
+    <section id="faq" className="relative py-24 sm:py-32 overflow-hidden">
+      <AtmosphericGlow tone="cool" position="center" size={700} opacity={0.06} />
+      <div className="container-narrow relative z-10">
         <ScrollReveal className="text-center mb-16">
           <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
             FAQ
