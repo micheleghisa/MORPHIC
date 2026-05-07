@@ -151,6 +151,42 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── NEW TECH MICRO ANIMATIONS ── */
+
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(26, 27, 28, 0.15); }
+  50% { box-shadow: 0 0 0 18px rgba(26, 27, 28, 0); }
+}
+
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(26, 27, 28, 0.08); }
+  50% { border-color: rgba(26, 27, 28, 0.2); }
+}
+
+@keyframes scanVertical {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes dataFlow {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes techFloat {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+  25% { transform: translateY(-4px) translateX(2px); opacity: 0.8; }
+  50% { transform: translateY(-2px) translateX(-2px); opacity: 0.6; }
+  75% { transform: translateY(-6px) translateX(1px); opacity: 0.7; }
+}
+
+@keyframes gridShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 24px 24px; }
+}
+
 .animate-fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
 .animate-scale-in { animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -158,6 +194,9 @@
 .animate-slide-right { animation: slideInRight 0.5s ease-out forwards; }
 .animate-float { animation: float 3s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-cta-glow { animation: ctaGlow 2.5s ease-in-out infinite; }
+.animate-border-pulse { animation: borderPulse 3s ease-in-out infinite; }
+.animate-tech-float { animation: techFloat 4s ease-in-out infinite; }
 .animate-shimmer {
   background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e5 50%, #f0f0f0 75%);
   background-size: 200% 100%;

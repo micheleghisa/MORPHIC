@@ -211,8 +211,9 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-1">
           <a href="#how-it-works" className="btn-ghost">How It Works</a>
           <a href="#faq" className="btn-ghost">FAQ</a>
-          <Link href="/waitlist" className="btn-dark ml-3">
-            Start Now
+          <Link href="/waitlist" className="btn-dark ml-3 relative group animate-cta-glow">
+            Try For Free
+            <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
         </div>
 
@@ -235,7 +236,7 @@ function Navbar() {
             <div className="container-page py-4 flex flex-col gap-2">
               <a href="#how-it-works" className="btn-ghost justify-start" onClick={() => setMobileOpen(false)}>How It Works</a>
               <a href="#faq" className="btn-ghost justify-start" onClick={() => setMobileOpen(false)}>FAQ</a>
-              <Link href="/waitlist" className="btn-dark mt-2 justify-center" onClick={() => setMobileOpen(false)}>Start Now</Link>
+              <Link href="/waitlist" className="btn-dark mt-2 justify-center relative group animate-cta-glow" onClick={() => setMobileOpen(false)}>Try For Free</Link>
             </div>
           </motion.div>
         )}
@@ -245,6 +246,36 @@ function Navbar() {
 }
 
 // ─── HERO ───
+
+function HeroParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {Array.from({ length: 18 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-[#1a1b1c]"
+          style={{
+            width: (i % 3) + 2 + "px",
+            height: (i % 3) + 2 + "px",
+            left: `${10 + (i * 23) % 80}%`,
+            top: `${5 + (i * 17) % 85}%`,
+            opacity: 0.06 + (i % 3) * 0.02,
+          }}
+          animate={{
+            y: [(i % 3) * 10, -(i % 3) * 10, (i % 3) * 10],
+            opacity: [0.04 + (i % 3) * 0.02, 0.1 + (i % 3) * 0.03, 0.04 + (i % 3) * 0.02],
+          }}
+          transition={{
+            duration: 6 + (i % 5) * 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.3,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 function HeroSection() {
   const { scrollY } = useScroll();
@@ -257,6 +288,14 @@ function HeroSection() {
       {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#f8f9f9] via-white to-white" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-[#f0f1f2]/50 to-transparent rounded-full blur-3xl" />
+      {/* Tech particles */}
+      <HeroParticles />
+      {/* Animated scan line */}
+      <motion.div
+        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1a1b1c]/8 to-transparent pointer-events-none"
+        animate={{ top: ["10%", "90%", "10%"] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <motion.div style={{ opacity: heroOpacity, y: heroY }} className="container-narrow relative z-10 pt-24 pb-20 text-center">
         <motion.div
@@ -298,8 +337,15 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <Link href="/waitlist" className="btn-dark text-[16px] px-8 py-3.5 relative group animate-pulse-glow">
-            See Your Future Self — Free
+          <Link href="/waitlist" className="btn-dark text-[16px] px-8 py-3.5 relative group animate-cta-glow">
+            <span>See Your Future Self — Free</span>
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block ml-1.5"
+            >
+              →
+            </motion.span>
             <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
           <a href="#how-it-works" className="btn-outline text-[16px] px-8 py-3.5">
@@ -492,14 +538,40 @@ function ComparisonCards() {
 function VisualizationComingSoon() {
   return (
     <section className="relative py-32 sm:py-40 bg-[#f8f9f9] overflow-hidden">
+      {/* ── Top separator ── */}
+      <div className="absolute top-0 left-0 right-0">
+        <div className="h-px bg-gradient-to-r from-transparent via-[#d0d1d2] to-transparent" />
+        <div className="h-8 bg-gradient-to-b from-white to-transparent" />
+      </div>
+      {/* ── Bottom separator ── */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <div className="h-8 bg-gradient-to-t from-white to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#d0d1d2] to-transparent" />
+      </div>
+
       {/* Tech grid background */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: 'radial-gradient(circle, #1a1b1c 1px, transparent 1px)',
         backgroundSize: '24px 24px'
       }} />
-      {/* Animated scan line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1a1b1c]/10 to-transparent animate-pulse-soft" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1a1b1c]/10 to-transparent animate-pulse-soft" style={{ animationDelay: '1s' }} />
+      
+      {/* Animated scan lines — tech feel */}
+      <motion.div
+        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1a1b1c]/12 to-transparent pointer-events-none"
+        animate={{ top: ["0%", "100%", "0%"] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1a1b1c]/06 to-transparent pointer-events-none"
+        animate={{ top: ["30%", "90%", "30%"] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "linear", delay: 3 }}
+      />
+
+      {/* Corner accents */}
+      <div className="absolute top-6 left-6 w-6 h-6 border-l border-t border-[#d0d1d2]/60 pointer-events-none" />
+      <div className="absolute top-6 right-6 w-6 h-6 border-r border-t border-[#d0d1d2]/60 pointer-events-none" />
+      <div className="absolute bottom-6 left-6 w-6 h-6 border-l border-b border-[#d0d1d2]/60 pointer-events-none" />
+      <div className="absolute bottom-6 right-6 w-6 h-6 border-r border-b border-[#d0d1d2]/60 pointer-events-none" />
       
       <div className="container-narrow text-center relative z-10">
         <ScrollReveal>
@@ -520,9 +592,14 @@ function VisualizationComingSoon() {
             Same person, visible transformation.
           </p>
           <div className="inline-flex items-center gap-2 bg-white border border-[#e8e9ea] text-[#5f6468] text-[14px] font-medium px-5 py-3 rounded-full shadow-sm">
-            <svg className="w-5 h-5 text-[#1a1b1c]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <motion.svg
+              className="w-5 h-5 text-[#1a1b1c]"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}
+              animate={{ rotate: [0, 15, -15, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
-            </svg>
+            </motion.svg>
             AI visualization model in training
           </div>
         </ScrollReveal>
@@ -645,7 +722,7 @@ function ProtocolSection() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-[800px] mx-auto">
           {PROTOCOL_CATEGORIES.map((cat, i) => (
             <ScrollReveal key={cat} delay={i * 0.05}>
-              <div className="card-flat p-4 text-center hover:bg-[#f0f1f2] cursor-default">
+              <div className="card-flat p-4 text-center hover:bg-[#f0f1f2] hover:border-[#d0d1d2] cursor-default group transition-all duration-300">
                 <span className="text-[13px] font-medium text-[#3a3b3c]">{cat}</span>
               </div>
             </ScrollReveal>
@@ -733,8 +810,32 @@ function CountersSection() {
   const { count: seconds, nodeRef: ref4 } = useAnimatedCounter(180, 2);
 
   return (
-    <section className="py-24 sm:py-32 bg-[#1a1b1c] text-white">
-      <div className="container-page">
+    <section className="py-24 sm:py-32 bg-[#1a1b1c] text-white relative overflow-hidden">
+      {/* Tech dot grid background */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{
+        backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)',
+        backgroundSize: '32px 32px'
+      }} />
+      {/* Floating data dots */}
+      {Array.from({ length: 6 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-white pointer-events-none"
+          style={{
+            width: "2px",
+            height: "2px",
+            left: `${15 + i * 14}%`,
+            top: `${20 + (i * 11) % 60}%`,
+          }}
+          animate={{ opacity: [0.1, 0.5, 0.1], scale: [1, 2.5, 1] }}
+          transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.7 }}
+        />
+      ))}
+      {/* Tech corner accents */}
+      <div className="absolute top-4 left-4 w-4 h-4 border-l border-t border-white/10 pointer-events-none" />
+      <div className="absolute bottom-4 right-4 w-4 h-4 border-r border-b border-white/10 pointer-events-none" />
+
+      <div className="container-page relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-[800px] mx-auto text-center">
           {[
             { value: landmarks, ref: ref1, suffix: "", label: "Facial landmarks analyzed" },
@@ -772,8 +873,15 @@ function PricingSection() {
             Get your first analysis completely free. No credit card. 
             If you love it, unlock unlimited analyses for .99/month.
           </p>
-          <Link href="/waitlist" className="btn-dark text-[16px] px-10 py-4">
-            See Your Future Self — Free →
+          <Link href="/waitlist" className="btn-dark text-[16px] px-10 py-4 animate-cta-glow group">
+            <span>See Your Future Self — Free</span>
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block ml-1"
+            >
+              →
+            </motion.span>
           </Link>
           <p className="text-[#8b9094] text-[13px] mt-4">
             Coming soon: .99 one-time or .99/year unlimited
@@ -853,6 +961,12 @@ function CTASection() {
     <section className="py-24 sm:py-32 bg-[#1a1b1c] relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-3xl" />
+      {/* Ambient glow behind CTA button */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[60px] bg-white/10 rounded-full blur-2xl pointer-events-none"
+        animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.15, 1] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="container-narrow relative z-10 text-center">
         <ScrollReveal>
@@ -865,9 +979,16 @@ function CTASection() {
           </p>
           <Link
             href="/waitlist"
-            className="inline-flex items-center justify-center rounded-full bg-white text-[#1a1b1c] px-8 py-3.5 text-[16px] font-medium hover:bg-[#f0f1f2] active:scale-[0.97] transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-[#1a1b1c] px-10 py-4 text-[17px] font-semibold hover:bg-[#f0f1f2] hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] active:scale-[0.97] transition-all duration-300 animate-cta-glow group"
           >
-            See Your Future Self — Free
+            <span>See Your Future Self — Free</span>
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block"
+            >
+              →
+            </motion.span>
           </Link>
           <p className="text-[#5f6468] text-[13px] mt-4">
             Free trial. No credit card required.
