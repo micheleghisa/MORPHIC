@@ -257,6 +257,29 @@ function HeroSection() {
       {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#f8f9f9] via-white to-white" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-[#f0f1f2]/50 to-transparent rounded-full blur-3xl" />
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-[#1a1b1c]/5"
+            style={{
+              left: ,
+              top: ,
+            }}
+            animate={{
+              y: [-10, 10, -10],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 3 + i * 0.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.3,
+            }}
+          />
+        ))}
+      </div>
 
       <motion.div style={{ opacity: heroOpacity, y: heroY }} className="container-narrow relative z-10 pt-24 pb-20 text-center">
         <motion.div
@@ -298,8 +321,9 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <Link href="/waitlist" className="btn-dark text-[16px] px-8 py-3.5">
-            Try It Free — No Card Required
+          <Link href="/waitlist" className="btn-dark text-[16px] px-8 py-3.5 relative group animate-pulse-glow">
+            See Your Future Self — Free
+            <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
           <a href="#how-it-works" className="btn-outline text-[16px] px-8 py-3.5">
             How It Works
@@ -490,12 +514,26 @@ function ComparisonCards() {
 
 function VisualizationComingSoon() {
   return (
-    <section className="py-24 sm:py-32 bg-[#f8f9f9]">
-      <div className="container-narrow text-center">
+    <section className="relative py-32 sm:py-40 bg-[#f8f9f9] overflow-hidden">
+      {/* Tech grid background */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: 'radial-gradient(circle, #1a1b1c 1px, transparent 1px)',
+        backgroundSize: '24px 24px'
+      }} />
+      {/* Animated scan line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1a1b1c]/10 to-transparent animate-pulse-soft" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1a1b1c]/10 to-transparent animate-pulse-soft" style={{ animationDelay: '1s' }} />
+      
+      <div className="container-narrow text-center relative z-10">
         <ScrollReveal>
-          <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-white border border-[#e8e9ea] text-[#5f6468] text-[12px] font-medium px-4 py-2 rounded-full mb-8 shadow-sm">
+            <motion.span 
+              className="w-2 h-2 rounded-full bg-[#1a1b1c]" 
+              animate={{ opacity: [1, 0.3, 1] }} 
+              transition={{ duration: 2, repeat: Infinity }}
+            />
             Coming Soon
-          </p>
+          </div>
           <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold tracking-[-0.02em] text-[#1a1b1c] mb-4">
             See your future self
           </h2>
@@ -504,8 +542,8 @@ function VisualizationComingSoon() {
             how you&apos;ll look after following your personalized glow-up protocol.
             Same person, visible transformation.
           </p>
-          <div className="inline-flex items-center gap-2 bg-[#f0f1f2] text-[#5f6468] text-[14px] font-medium px-5 py-3 rounded-full">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="inline-flex items-center gap-2 bg-white border border-[#e8e9ea] text-[#5f6468] text-[14px] font-medium px-5 py-3 rounded-full shadow-sm">
+            <svg className="w-5 h-5 text-[#1a1b1c]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
             </svg>
             AI visualization model in training
@@ -758,7 +796,7 @@ function PricingSection() {
             If you love it, unlock unlimited analyses for .99/month.
           </p>
           <Link href="/waitlist" className="btn-dark text-[16px] px-10 py-4">
-            Join Waitlist →
+            See Your Future Self — Free →
           </Link>
           <p className="text-[#8b9094] text-[13px] mt-4">
             Coming soon: .99 one-time or .99/year unlimited
@@ -852,7 +890,7 @@ function CTASection() {
             href="/waitlist"
             className="inline-flex items-center justify-center rounded-full bg-white text-[#1a1b1c] px-8 py-3.5 text-[16px] font-medium hover:bg-[#f0f1f2] active:scale-[0.97] transition-all duration-200"
           >
-            Join Waitlist
+            See Your Future Self — Free
           </Link>
           <p className="text-[#5f6468] text-[13px] mt-4">
             Free trial. No credit card required.
