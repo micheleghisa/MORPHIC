@@ -211,7 +211,7 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-1">
           <a href="#how-it-works" className="btn-ghost">How It Works</a>
           <a href="#faq" className="btn-ghost">FAQ</a>
-          <Link href="#waitlist" className="btn-dark ml-3">
+          <Link href="/upload" className="btn-dark ml-3">
             Start Now
           </Link>
         </div>
@@ -235,7 +235,7 @@ function Navbar() {
             <div className="container-page py-4 flex flex-col gap-2">
               <a href="#how-it-works" className="btn-ghost justify-start" onClick={() => setMobileOpen(false)}>How It Works</a>
               <a href="#faq" className="btn-ghost justify-start" onClick={() => setMobileOpen(false)}>FAQ</a>
-              <Link href="#waitlist" className="btn-dark mt-2 justify-center" onClick={() => setMobileOpen(false)}>Start Now</Link>
+              <Link href="/upload" className="btn-dark mt-2 justify-center" onClick={() => setMobileOpen(false)}>Start Now</Link>
             </div>
           </motion.div>
         )}
@@ -298,7 +298,7 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <Link href="#waitlist" className="btn-dark text-[16px] px-8 py-3.5">
+          <Link href="/upload" className="btn-dark text-[16px] px-8 py-3.5">
             Try It Free — No Card Required
           </Link>
           <a href="#how-it-works" className="btn-outline text-[16px] px-8 py-3.5">
@@ -799,7 +799,7 @@ function PricingSection() {
             Get your first analysis completely free. No credit card. 
             If you love it, unlock unlimited analyses for .99/month.
           </p>
-          <Link href="#waitlist" className="btn-dark text-[16px] px-10 py-4">
+          <Link href="/upload" className="btn-dark text-[16px] px-10 py-4">
             Start Free Analysis →
           </Link>
           <p className="text-[#8b9094] text-[13px] mt-4">
@@ -811,49 +811,7 @@ function PricingSection() {
   );
 }
 
-
-// ─── WAITLIST ───
-
-function WaitlistSection() {
-  return (
-    <section id="waitlist" className="py-24 sm:py-32">
-      <div className="container-narrow text-center">
-        <ScrollReveal>
-          <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
-            Early Access
-          </p>
-          <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold tracking-[-0.02em] text-[#1a1b1c] mb-4">
-            Get early access to MORPHIC
-          </h2>
-          <p className="text-[#5f6468] text-[16px] max-w-[500px] mx-auto mb-10">
-            Be the first to get a science-backed facial analysis. 
-            Join the waitlist and we will notify you when we launch.
-          </p>
-          <form 
-            action="https://formsubmit.co/el/micheleghisa88@gmail.com" 
-            method="POST"
-            className="flex flex-col sm:flex-row gap-3 max-w-[420px] mx-auto"
-          >
-            <input
-              type="email"
-              name="email"
-              placeholder="Your email address"
-              required
-              className="flex-1 rounded-full border border-[#e0e1e2] px-5 py-3.5 text-[15px] focus:outline-none focus:ring-2 focus:ring-[#1a1b1c]/10 focus:border-[#c0c1c2] transition-all"
-            />
-            <button type="submit" className="btn-dark whitespace-nowrap text-[15px] px-8 py-3.5">
-              Notify Me →
-            </button>
-          </form>
-          <p className="text-[#b0b1b2] text-[12px] mt-4">No spam. Just launch updates.</p>
-        </ScrollReveal>
-      </div>
-    </section>
-  );
-}
-
 // ─── FAQ ───
-
 
 function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
@@ -933,7 +891,7 @@ function CTASection() {
             No surgery. No filters. Just results.
           </p>
           <Link
-            href="#waitlist"
+            href="/upload"
             className="inline-flex items-center justify-center rounded-full bg-white text-[#1a1b1c] px-8 py-3.5 text-[16px] font-medium hover:bg-[#f0f1f2] active:scale-[0.97] transition-all duration-200"
           >
             Start Free Analysis
@@ -990,7 +948,6 @@ export default function HomePage() {
       <CountersSection />
       <ResearchSection />
       <PricingSection />
-      <WaitlistSection />
       <FAQSection />
       <CTASection />
       <Footer />
