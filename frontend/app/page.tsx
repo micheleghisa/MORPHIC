@@ -288,8 +288,8 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="text-[17px] sm:text-[19px] text-[#5f6468] leading-relaxed max-w-[580px] mx-auto mb-10 text-balance"
         >
-          Get your personalized facial analysis and transformation plan based on
-          2,000+ academic studies. Every year.
+          Get a science-backed facial analysis in minutes. 478 landmarks measured,
+          detailed aesthetic report, and a personalized non-surgical glow-up protocol.
         </motion.p>
 
         <motion.div
@@ -445,6 +445,76 @@ function FaceIllustration({ variant }: { variant: "before" | "after" }) {
 }
 
 // ─── COMPARISON CARDS ───
+
+function ComparisonCards() {
+  const items = [
+    { label: "Symmetry", before: "78/100", after: "94/100", desc: "Brow alignment, eye balance, lip symmetry" },
+    { label: "Skin Health", before: "62/100", after: "87/100", desc: "Texture refinement, tone evening, pore reduction" },
+    { label: "Jawline", before: "71/100", after: "90/100", desc: "Facial exercises, posture correction, lymph drainage" },
+    { label: "Eye Area", before: "74/100", after: "89/100", desc: "Dark circle reduction, brow lift, lash enhancement" },
+  ];
+
+  return (
+    <section className="py-20 bg-[#f8f9f9]">
+      <div className="container-page">
+        <ScrollReveal className="text-center mb-14">
+          <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-[-0.02em] text-[#1a1b1c] mb-3">
+            Real improvements, measured in numbers
+          </h2>
+          <p className="text-[#5f6468] text-[15px] max-w-[480px] mx-auto">
+            Every metric is tracked across your glow-up journey. See exactly what changes.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[900px] mx-auto">
+          {items.map((item, i) => (
+            <ScrollReveal key={item.label} delay={i * 0.1}>
+              <div className="card-elevated p-5 text-center">
+                <p className="text-[13px] font-semibold text-[#1a1b1c] mb-3">{item.label}</p>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <span className="text-[#8b9094] text-[12px]">{item.before}</span>
+                  <svg className="w-4 h-4 text-[#b0b1b2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                  <span className="text-[#1a1b1c] font-bold text-[15px]">{item.after}</span>
+                </div>
+                <p className="text-[12px] text-[#8b9094] leading-relaxed">{item.desc}</p>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VisualizationComingSoon() {
+  return (
+    <section className="py-24 sm:py-32 bg-[#f8f9f9]">
+      <div className="container-narrow text-center">
+        <ScrollReveal>
+          <p className="text-[12px] uppercase tracking-[0.2em] text-[#8b9094] font-medium mb-4">
+            Coming Soon
+          </p>
+          <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold tracking-[-0.02em] text-[#1a1b1c] mb-4">
+            See your future self
+          </h2>
+          <p className="text-[#5f6468] text-[16px] max-w-[550px] mx-auto mb-10">
+            We&apos;re training a proprietary AI model that will show you exactly
+            how you&apos;ll look after following your personalized glow-up protocol.
+            Same person, visible transformation.
+          </p>
+          <div className="inline-flex items-center gap-2 bg-[#f0f1f2] text-[#5f6468] text-[14px] font-medium px-5 py-3 rounded-full">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+            </svg>
+            AI visualization model in training
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
 
 function ComparisonCards() {
   const items = [
@@ -872,7 +942,7 @@ export default function HomePage() {
       <Navbar />
       <HeroSection />
       <HowItWorksSection />
-      <BeforeAfterSlider />
+      <VisualizationComingSoon />
       <ComparisonCards />
       <ProtocolSection />
       <CountersSection />
