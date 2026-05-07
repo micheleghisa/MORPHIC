@@ -50,6 +50,15 @@ async def root():
     return {"name": "MORPHIC API", "docs": "/docs"}
 
 
-# Routes
-from api.routes.analysis import router as analysis_router
-app.include_router(analysis_router)
+# Routes — with safe imports if AI deps missing on Railway
+try:
+    from api.routes.analysis import router as analysis_router
+    app.include_router(analysis_router)
+except ImportError as e:
+    @app.get("/api/v1/analyze")
+    async def analyze_unavailable():
+        return {"error": "AI engine initializing. Please try again in a few minutes.", "detail": str(e)[:100]}
+
+    @app.get("/api/v1/analysis/{analysis_id}")
+    async def analysis_unavailable(analysis_id: str):
+        return {"error": "AI engine initializing", "status": "unavailable"}
