@@ -516,48 +516,6 @@ function VisualizationComingSoon() {
   );
 }
 
-function ComparisonCards() {
-  const items = [
-    { label: "Symmetry", before: "78/100", after: "94/100", desc: "Brow alignment, eye balance, lip symmetry" },
-    { label: "Skin Health", before: "62/100", after: "87/100", desc: "Texture refinement, tone evening, pore reduction" },
-    { label: "Jawline", before: "71/100", after: "90/100", desc: "Facial exercises, posture correction, lymph drainage" },
-    { label: "Eye Area", before: "74/100", after: "89/100", desc: "Dark circle reduction, brow lift, lash enhancement" },
-  ];
-
-  return (
-    <section className="py-20 bg-[#f8f9f9]">
-      <div className="container-page">
-        <ScrollReveal className="text-center mb-14">
-          <h2 className="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-[-0.02em] text-[#1a1b1c] mb-3">
-            Real improvements, measured in numbers
-          </h2>
-          <p className="text-[#5f6468] text-[15px] max-w-[480px] mx-auto">
-            Every metric is tracked across your glow-up journey. See exactly what changes.
-          </p>
-        </ScrollReveal>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[900px] mx-auto">
-          {items.map((item, i) => (
-            <ScrollReveal key={item.label} delay={i * 0.1}>
-              <div className="card-elevated p-5 text-center">
-                <p className="text-[13px] font-semibold text-[#1a1b1c] mb-3">{item.label}</p>
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-[#8b9094] text-[12px]">{item.before}</span>
-                  <svg className="w-4 h-4 text-[#b0b1b2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                  <span className="text-[#1a1b1c] font-bold text-[15px]">{item.after}</span>
-                </div>
-                <p className="text-[12px] text-[#8b9094] leading-relaxed">{item.desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function BeforeAfterSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
